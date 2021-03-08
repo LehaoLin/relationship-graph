@@ -1,4 +1,4 @@
-function getOption(graphInfo){
+function getOption(graphInfo) {
     //给节点设置样式
     graphInfo.nodes.forEach(function (node) {
         //node.itemStyle = null;//
@@ -7,21 +7,21 @@ function getOption(graphInfo){
         node.x = node.y = null;
         node.draggable = true;
     });
-    
-    
-    title=graphInfo['title']
-    nodes=graphInfo['nodes']
-    links=graphInfo['links']
-    categories=graphInfo['categories']
-    
+
+
+    title = graphInfo['title']
+    nodes = graphInfo['nodes']
+    links = graphInfo['links']
+    categories = graphInfo['categories']
+
     //设置option样式
     option = {
-        title : {
-            text:title,
-            x:'right',
-            y:'bottom'
+        title: {
+            text: title,
+            x: 'right',
+            y: 'bottom'
         },
-        tooltip : {
+        tooltip: {
             trigger: 'item',
             formatter: '{a} : {b}'
             //formatter: function(params){//触发之后返回的参数，这个函数是关键
@@ -29,13 +29,13 @@ function getOption(graphInfo){
             //   window.open("http://www.baidu.com")
             //}
         },
-        color:['#EE6A50','#4F94CD','#B3EE3A','#DAA520'],
+        color: ['#EE6A50', '#4F94CD', '#B3EE3A', '#DAA520'],
         toolbox: {
-            show : true,
-            feature : {
-                restore : {show: true},
-                magicType: {show: true, type: ['force', 'chord']},
-                saveAsImage : {show: true}
+            show: true,
+            feature: {
+                restore: { show: true },
+                magicType: { show: true, type: ['force', 'chord'] },
+                saveAsImage: { show: true }
             }
         },
         legend: {
@@ -44,12 +44,12 @@ function getOption(graphInfo){
                 return a.name;
             })
         },
-        series : [
+        series: [
             {
-                type:'force',
-                name : title,
+                type: 'force',
+                name: title,
                 ribbonType: false,
-                categories : categories,
+                categories: categories,
                 itemStyle: {
                     normal: {
                         label: {
@@ -58,10 +58,10 @@ function getOption(graphInfo){
                                 color: '#333'
                             }
                         },
-                        nodeStyle : {
-                            brushType : 'both',
-                            borderColor : 'rgba(255,215,0,0.4)',
-                            borderWidth : 1
+                        nodeStyle: {
+                            brushType: 'both',
+                            borderColor: 'rgba(255,215,0,0.4)',
+                            borderWidth: 1
                         },
                         linkStyle: {
                             type: 'curve'
@@ -72,39 +72,39 @@ function getOption(graphInfo){
                             show: false
                             // textStyle: null      // 默认使用全局文本样式，详见TEXTSTYLE
                         },
-                        nodeStyle : {
+                        nodeStyle: {
                             //r: 30
                         },
-                        linkStyle : {}
+                        linkStyle: {}
                     }
                 },
                 useWorker: false,
-                minRadius : 15,
-                maxRadius : 25,
+                minRadius: 15,
+                maxRadius: 25,
                 gravity: 1.1,
                 scaling: 1.1,
                 roam: 'move',
-                nodes:nodes,
-                links :links
+                nodes: nodes,
+                links: links
             }
         ]
     };
-    return option   
-    }
-    function createGraph(myChart,mygraph){
+    return option
+}
+function createGraph(myChart, mygraph) {
     //设置option样式
-    option=getOption(mygraph)
+    option = getOption(mygraph)
     //使用Option填充图形
     myChart.setOption(option);
     //点可以跳转页面
     myChart.on('click', function (params) {
-                var data=params.value
-                //点没有source属性
-                if(data.source==undefined){
-                    nodeName=params.name
-                    window.open("http://www.baidu.com")
-                }
-    
+        var data = params.value
+        //点没有source属性
+        if (data.source == undefined) {
+            nodeName = params.name
+            window.open("http://www.baidu.com")
+        }
+
     });
     //myChart.hideLoading();
-    }
+}
